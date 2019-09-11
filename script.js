@@ -1,39 +1,31 @@
-var css = document.querySelector("h3");
-var color1 = document.querySelector(".color1");
-var color2 = document.querySelector(".color2");
-var body = document.querySelector("body");
-var btn = document.querySelector("button");
-var charHEX = "0123456789ABCDEF";
-var hex = "#";
+const h3 = document.querySelector("h3");
+const [color1, color2] = document.querySelectorAll(".color");
+const body = document.querySelector("body");
+const btn = document.querySelector("button");
+const charHEX = "0123456789ABCDEF";
 
-function changeColorValues(){
+
+const changeColorValues = () => {
 	color1.value = genRandomHEXColor();
 	color2.value = genRandomHEXColor();
-	console.log("Color 1 HEX: " + color1.value);
-	console.log("Color 2 HEX: " + color2.value);
 	changeBGcolor();
 }
 
-function genRandomHEXColor(){
-	hex = "#";
+const genRandomHEXColor = () => {
+	let hex = "#";
 	for (var i = 0; i < 6; i++) {
 		hex += charHEX[Math.floor(Math.random()*16)];
 	}
 	return hex;
 }
 
-
-function changeBGcolor(){
-	body.style.background = "linear-gradient(to right, " 
-	+ color1.value +", " + color2.value + ")";
-
-	css.textContent ="background: " + body.style.background + ";";
+const changeBGcolor = () => {
+	body.style.background = ` linear-gradient(to right, ${color1.value}, ${color2.value})`;  
+	h3.textContent =`background: ${body.style.background}`;
 }
 
 changeBGcolor();
 
-btn.addEventListener("click",changeColorValues);
-
+btn.addEventListener("click", changeColorValues);
 color1.addEventListener("input", changeBGcolor);
-
 color2.addEventListener("input", changeBGcolor);
